@@ -1,0 +1,38 @@
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+
+# Anchor build artifacts
+dist/
+out/
+
+# IDL & type artifacts (generated, shouldn't be committed)
+target/idl/
+target/types/
+
+# Keypairs & secrets — CRITICAL for security
+**/*.json.bk
+deploy-keypair.json
+wallet.json
+id.json
+
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# Anchor program keypairs (auto-generated)
+target/deploy/*-keypair.json
+
+# OS files
+Thumbs.db
+
+# Editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
