@@ -7,7 +7,6 @@ declare_id!("5WkgStN4hEMzvVYaqY7TLZwbQpCVaZLXtZgTcFSDi8sY");
 pub mod academic_trustchain {
     use super::*;
 
-    // Only an authorized admin can call this
     pub fn issue_badge(ctx: Context<IssueBadge>, event_name: String) -> Result<()> {
         let clock = Clock::get()?;
         let achievement = &mut ctx.accounts.achievement_account;
@@ -26,7 +25,7 @@ pub mod academic_trustchain {
 #[instruction(event_name: String)]
 pub struct IssueBadge<'info> {
     #[account(mut)]
-    pub authority: Signer<'info>, // The Club President
+    pub authority: Signer<'info>,
     
     /// CHECK: The recipient student
     pub student: UncheckedAccount<'info>,
@@ -34,7 +33,7 @@ pub struct IssueBadge<'info> {
     #[account(
         init,
         payer = authority,
-        space = 8 + 32 + 32 + 100 + 8, // Discriminator + Keys + String + Timestamp
+        space = 8 + 32 + 32 + 100 + 8,
         seeds = [b"achievement", student.key().as_ref(), event_name.as_bytes()],
         bump
     )]
